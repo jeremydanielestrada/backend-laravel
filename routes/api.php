@@ -14,11 +14,12 @@ Route::get('/user', function (Request $request) {
 //Carousel Items Routes
 Route::get('/carousel',[CarouselItemsController::class, 'index']);
 Route::get('/carousel/{id}',[CarouselItemsController::class, 'show']);
-Route::post('/carousel',[CarouselItemsController::class, 'store']);
 Route::delete('/carousel/{id}',[CarouselItemsController::class, 'destroy']);
 
 //User Routes
 Route::get('/user',[UserController::class, 'index']);
+Route::get('/user/{id}',[UserController::class, 'show']);
+Route::post('/user',[UserController::class, 'store']);
 Route::delete('/user/{id}',[UserController::class, 'destroy']);
 
 
