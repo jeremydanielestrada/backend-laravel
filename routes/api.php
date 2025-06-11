@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ProfileController;
 
 
 
@@ -42,7 +43,11 @@ use App\Http\Controllers\API\AuthController;
         Route::delete('/user/{id}',      'destroy');
         });
 
+    //User specific API's
+        Route::get('/profile',  [ProfileController::class, 'show']);
+        Route::put('/profile/image/',  [ProfileController::class, 'image'])->name('profile.image');
 });
+
 
 
 
