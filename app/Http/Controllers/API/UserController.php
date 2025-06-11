@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -82,9 +83,10 @@ class UserController extends Controller
 
     }
 
+    //Update the password of the specified storage
     public function password(UserRequest $request, string $id)
     {
-        //
+        
          $user = User::findOrFail($id);
 
         $validated = $request->validated();
@@ -108,5 +110,22 @@ class UserController extends Controller
 
          return $user;
 
+    }
+
+    //Update the image of the specified resources
+      public function image(UserRequest $request, string $id)
+    {
+         $user = User::findOrFail($id);
+
+          if(!is_null($user->image)){
+
+            Storage::disk('public')->delete($user->image);
+        }
+
+        $user->image= $request->file('image')->storePublicly('images', 'public');
+
+        $user->save();
+
+        return $user;
     }
 }

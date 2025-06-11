@@ -18,10 +18,9 @@ use App\Http\Controllers\API\AuthController;
 
 
 
-
-Route::middleware(['auth:sanctum'])->group(function () {
-
-         Route::post('/logout',[ AuthController::class, 'logout']);
+//Private API's
+ Route::middleware(['auth:sanctum'])->group(function () {
+         Route::post('/logout',        [ AuthController::class, 'logout']);
 
                 //Carousel Items Routes
  Route::controller(CarouselItemsController::class)->group(function () {
@@ -33,12 +32,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
     //User Routes
-    Route::controller(UserController::class)->group(function () {
+ Route::controller(UserController::class)->group(function () {
         Route::get('/user',              'index');
         Route::get('/user/{id}',         'show');
         Route::put('/user/{id}',         'update')->name('user.update');
         Route::put('/user/email/{id}',   'email')->name('user.email');
         Route::put('/user/password/{id}','password')->name('user.password');
+        Route::put('/user/image/{id}','image')->name('user.image');
         Route::delete('/user/{id}',      'destroy');
         });
 
